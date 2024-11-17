@@ -65,11 +65,11 @@ python main.py
 After running the above commands, you should see the following output:
 
 ```console
-Area of shape at index 0 (Circle): 78.53981633974483
-Area of shape at index 1 (Rectangle): 24.0
-Total area of shapes: 102.53981633974483
-Data Stream Buffer (Initial): [ 0 10 20 30 40 50 60 70 80 90]
-Data Stream Buffer (After Modification): [  0  10  20 100  40  50  60  70  80  90]
+Area of shape at index 0 (Circle): 78.54
+Area of shape at index 1 (Rectangle): 24.00
+Total area of shapes: 102.54
+Data Stream Buffer (Initial): [ 0 10 20]
+Data Stream Buffer (After Modification): [30 10 20]
 ```
 
 ## **Proof of Task Success**
