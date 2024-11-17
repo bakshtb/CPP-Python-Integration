@@ -8,7 +8,8 @@
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(datastream_example, m) {
+PYBIND11_MODULE(cpp_wrapper, m)
+{
     py::class_<Shape, std::shared_ptr<Shape>>(m, "Shape")
         .def("area", &Shape::area);
 
@@ -26,11 +27,9 @@ PYBIND11_MODULE(datastream_example, m) {
 
     py::class_<DataStreamExample>(m, "DataStreamExample")
         .def(py::init<size_t>())
-        .def("getDataBuffer", [](DataStreamExample& self) {
-            return py::array_t<uint32_t>(
-                {self.getBufferSize()}, {sizeof(uint32_t)},
-                self.getDataBuffer(), py::cast(&self)
-            );
-        })
+        .def("getDataBuffer", [](DataStreamExample &self)
+             { return py::array_t<uint32_t>(
+                   {self.getBufferSize()}, {sizeof(uint32_t)},
+                   self.getDataBuffer(), py::cast(&self)); })
         .def("getBufferSize", &DataStreamExample::getBufferSize);
 }

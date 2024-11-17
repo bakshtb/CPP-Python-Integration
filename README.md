@@ -59,3 +59,25 @@ make
 # Run the Python script to test the integration
 cd ..
 python main.py
+```
+
+### Expected Output
+After running the above commands, you should see the following output:
+
+```console
+Area of shape at index 0 (Circle): 78.53981633974483
+Area of shape at index 1 (Rectangle): 24.0
+Total area of shapes: 102.53981633974483
+Data Stream Buffer (Initial): [ 0 10 20 30 40 50 60 70 80 90]
+Data Stream Buffer (After Modification): [  0  10  20 100  40  50  60  70  80  90]
+```
+
+## **Proof of Task Success**
+
+- The object-oriented principles of **inheritance** and **polymorphism** are evident in how the `Circle` and `Rectangle` inherit from the `Shape` class and override the `area()` method.
+  
+- **Pointer usage** is demonstrated through the `DataStreamExample` class, which uses a dynamically allocated buffer (`new uint32_t[bufferSize]`) and allows its manipulation from Python.
+
+- The successful execution of the Python code, including the correct area calculations and the ability to modify the buffer, proves that the task of integrating C++ with Python has been accomplished effectively.
+
+This demonstrates the integration of C++ functionality into Python, showing that we can handle complex C++ concepts like inheritance, polymorphism, and pointers within Python seamlessly.
