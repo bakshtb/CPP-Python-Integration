@@ -31,5 +31,6 @@ PYBIND11_MODULE(cpp_wrapper, m)
              { return py::array_t<uint32_t>(
                    {self.getBufferSize()}, {sizeof(uint32_t)},
                    self.getDataBuffer(), py::cast(&self)); })
-        .def("getBufferSize", &DataStreamExample::getBufferSize);
+        .def("getBufferSize", &DataStreamExample::getBufferSize)
+        .def("printDataBuffer", &DataStreamExample::printDataBuffer);
 }

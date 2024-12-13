@@ -67,6 +67,10 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "shapemanager.h": "c",
+        "rectangle.h": "c",
+        "shape.h": "c",
+        "datastreamexample.h": "c"
     }
 }
