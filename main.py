@@ -1,39 +1,46 @@
-import sys
-import os
-import argparse
+import pytest
+import math
 
-def import_cpp_wrapper(folder_name):
-    if not os.path.isdir(folder_name):
-        raise ValueError(f"The provided folder '{folder_name}' does not exist or is not a directory.")
-    
-    if folder_name not in sys.path:
-        sys.path.insert(0, folder_name)
+def test_shape_manager(cpp_wrapper_module):
+    # Define variables for the dimensions
+    circle_radius = 7
+    rectangle_length = 5
+    rectangle_width = 8
 
-def main():
-    parser = argparse.ArgumentParser(description="Import cpp_wrapper from a specified folder and demonstrate its usage.")
-    parser.add_argument("folder_name", type=str, help="Path to the folder containing the cpp_wrapper module")
-    args = parser.parse_args()
+    circle_area = math.pi * circle_radius**2
+    rectangle_area = rectangle_length * rectangle_width
+    total_area = circle_area + rectangle_area
 
-    import_cpp_wrapper(args.folder_name)
-    import cpp_wrapper
+    shape_manager = cpp_wrapper_module.ShapeManager()
+    circle = cpp_wrapper_module.Circle(circle_radius)
+    rectangle = cpp_wrapper_module.Rectangle(rectangle_length, rectangle_width)
 
-    circle = cpp_wrapper.Circle(5)
-    rectangle = cpp_wrapper.Rectangle(4, 6)
-
-    shape_manager = cpp_wrapper.ShapeManager()
     shape_manager.addShape(circle)
     shape_manager.addShape(rectangle)
 
-    print(f"Area of shape at index 0 (Circle): {shape_manager.getShape(0).area():.2f}")
-    print(f"Area of shape at index 1 (Rectangle): {shape_manager.getShape(1).area():.2f}")
-    print(f"Total area of shapes: {shape_manager.totalArea():.2f}")
+    assert shape_manager.getShape(0).area() == pytest.approx(circle_area, 0.01), "ShapeManager failed to retrieve correct Circle area"
+    assert shape_manager.getShape(1).area() == pytest.approx(rectangle_area, 0.01), "ShapeManager failed to retrieve correct Rectangle area"
+    assert shape_manager.totalArea() == pytest.approx(total_area, 0.01), "ShapeManager total area calculation is incorrect"
 
-    data_stream = cpp_wrapper.DataStreamExample(3)
-    print("Data Stream Buffer (Initial):", data_stream.getDataBuffer())
 
+
+def test_data_stream_init(cpp_wrapper_module):
+    data_stream = cpp_wrapper_module.DataStreamExample(3)
     buffer = data_stream.getDataBuffer()
-    buffer[0] = 30 
-    print("Data Stream Buffer (After Modification):", data_stream.getDataBuffer())
+
+    index = 0
+    for i in buffer:
+        assert i == index * 10, f"Buffer value at index {index} is incorrect"
+        index += 1
+
+def test_data_stream_modification(cpp_wrapper_module):
+    data_stream = cpp_wrapper_module.DataStreamExample(3)
+    buffer = data_stream.getDataBuffer()
+
+    buffer[0] = 30
+    assert data_stream.getDataBuffer()[0] == 30, "DataStream buffer modification failed"
+
+
 
 if __name__ == "__main__":
-    main()
+    pytest.main([__file__])
