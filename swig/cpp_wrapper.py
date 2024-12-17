@@ -62,21 +62,6 @@ class _SwigNonDynamicMeta(type):
 
 
 SHARED_PTR_DISOWN = _cpp_wrapper.SHARED_PTR_DISOWN
-
-def new_intp():
-    return _cpp_wrapper.new_intp()
-
-def copy_intp(value):
-    return _cpp_wrapper.copy_intp(value)
-
-def delete_intp(obj):
-    return _cpp_wrapper.delete_intp(obj)
-
-def intp_assign(obj, value):
-    return _cpp_wrapper.intp_assign(obj, value)
-
-def intp_value(obj):
-    return _cpp_wrapper.intp_value(obj)
 class Shape(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
@@ -146,15 +131,15 @@ class DataStreamExample(object):
     def __init__(self, size):
         _cpp_wrapper.DataStreamExample_swiginit(self, _cpp_wrapper.new_DataStreamExample(size))
 
-    def getDataBuffer(self):
-        return _cpp_wrapper.DataStreamExample_getDataBuffer(self)
-
     def printDataBuffer(self):
         return _cpp_wrapper.DataStreamExample_printDataBuffer(self)
 
     def getBufferSize(self):
         return _cpp_wrapper.DataStreamExample_getBufferSize(self)
     __swig_destroy__ = _cpp_wrapper.delete_DataStreamExample
+
+    def getDataBuffer(self, *args):
+        return _cpp_wrapper.DataStreamExample_getDataBuffer(self, *args)
 
 # Register DataStreamExample in _cpp_wrapper:
 _cpp_wrapper.DataStreamExample_swigregister(DataStreamExample)

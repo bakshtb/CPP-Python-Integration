@@ -20,6 +20,15 @@ include(${SWIG_USE_FILE})
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 
+# Find numpy
+execute_process(
+    COMMAND python3 -c "import numpy; print(numpy.get_include())"
+    OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+include_directories(${NUMPY_INCLUDE_DIR})
+
 # Define the source files for the project
 set(src
     ../src/Circle.cpp
@@ -38,7 +47,8 @@ set(includes
     ../include/Shape.h
 )
 
-include_directories(${Python3_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/../include)
+# Include directories
+include_directories(${Python3_INCLUDE_DIRS} ${NUMPY_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 # Set the SWIG module name
 set_property(SOURCE ${includes} PROPERTY SWIG_MODULE_NAME cpp_wrapper)

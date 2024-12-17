@@ -2695,15 +2695,13 @@ SWIGINTERN PyObject *SWIG_PyStaticMethod_New(PyObject *SWIGUNUSEDPARM(self), PyO
 #define SWIGTYPE_p_Shape swig_types[3]
 #define SWIGTYPE_p_ShapeManager swig_types[4]
 #define SWIGTYPE_p_char swig_types[5]
-#define SWIGTYPE_p_int swig_types[6]
-#define SWIGTYPE_p_std__shared_ptrT_Circle_t swig_types[7]
-#define SWIGTYPE_p_std__shared_ptrT_DataStreamExample_t swig_types[8]
-#define SWIGTYPE_p_std__shared_ptrT_Rectangle_t swig_types[9]
-#define SWIGTYPE_p_std__shared_ptrT_ShapeManager_t swig_types[10]
-#define SWIGTYPE_p_std__shared_ptrT_Shape_t swig_types[11]
-#define SWIGTYPE_p_uint32_t swig_types[12]
-static swig_type_info *swig_types[14];
-static swig_module_info swig_module = {swig_types, 13, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__shared_ptrT_Circle_t swig_types[6]
+#define SWIGTYPE_p_std__shared_ptrT_Rectangle_t swig_types[7]
+#define SWIGTYPE_p_std__shared_ptrT_ShapeManager_t swig_types[8]
+#define SWIGTYPE_p_std__shared_ptrT_Shape_t swig_types[9]
+#define SWIGTYPE_p_uint32_t swig_types[10]
+static swig_type_info *swig_types[12];
+static swig_module_info swig_module = {swig_types, 11, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2812,6 +2810,7 @@ namespace swig {
 #include "../include/Rectangle.h"
 #include "../include/ShapeManager.h"
 #include "../include/DataStreamExample.h"
+#define SWIG_FILE_WITH_INIT
 
 
 SWIGINTERNINLINE PyObject*
@@ -2821,35 +2820,18 @@ SWIGINTERNINLINE PyObject*
 }
 
 
-  static int *new_intp() { 
-    return (new int());
-  }
-  
-  static int *copy_intp(int value) { 
-    return (new int(static_cast< const int& >(value)));
-  }
-
-  static void delete_intp(int *obj) { 
-    if (obj) delete obj;
-  }
-
-  static void intp_assign(int *obj, int value) {
-    *obj = value;
-  }
-
-  static int intp_value(int *obj) {
-    return *obj;
-  }
-
-
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
+#ifndef SWIG_FILE_WITH_INIT
+#define NO_IMPORT_ARRAY
 #endif
+#include "stdio.h"
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+#include <numpy/arrayobject.h>
+
+
+#include <complex> 
+
+
+  #define SWIG_From_double   PyFloat_FromDouble 
 
 
 SWIGINTERN int
@@ -2898,6 +2880,19 @@ SWIG_AsVal_double (PyObject *obj, double *val)
 }
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 #include <float.h>
 
 
@@ -2932,81 +2927,6 @@ SWIG_CanCastAsInteger(double *d, double min, double max) {
   }
   return 0;
 }
-
-
-SWIGINTERN int
-SWIG_AsVal_long (PyObject *obj, long* val)
-{
-#if PY_VERSION_HEX < 0x03000000
-  if (PyInt_Check(obj)) {
-    if (val) *val = PyInt_AsLong(obj);
-    return SWIG_OK;
-  } else
-#endif
-  if (PyLong_Check(obj)) {
-    long v = PyLong_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_OK;
-    } else {
-      PyErr_Clear();
-      return SWIG_OverflowError;
-    }
-  }
-#ifdef SWIG_PYTHON_CAST_MODE
-  {
-    int dispatch = 0;
-    long v = PyInt_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_AddCast(SWIG_OK);
-    } else {
-      PyErr_Clear();
-    }
-    if (!dispatch) {
-      double d;
-      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
-      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
-	if (val) *val = (long)(d);
-	return res;
-      }
-    }
-  }
-#endif
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
 SWIGINTERN int
@@ -3055,6 +2975,16 @@ SWIG_AsVal_unsigned_SS_long (PyObject *obj, unsigned long *val)
 #endif
   return SWIG_TypeError;
 }
+
+
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
 
 
 #if defined(LLONG_MAX) && !defined(SWIG_LONG_LONG_AVAILABLE)
@@ -3160,119 +3090,13 @@ SWIG_From_size_t  (size_t value)
 #endif
 }
 
+SWIGINTERN PyObject *DataStreamExample_getDataBuffer__SWIG_1(DataStreamExample *self){
+        npy_intp dims[1] = { static_cast<npy_intp>(self->getBufferSize()) };
+        return PyArray_SimpleNewFromData(1, dims, NPY_UINT32, self->getDataBuffer());
+    }
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_intp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int *result = 0 ;
-  
-  if (!SWIG_Python_UnpackTuple(args, "new_intp", 0, 0, 0)) SWIG_fail;
-  result = (int *)new_intp();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_int, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_copy_intp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int *result = 0 ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "copy_intp" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  result = (int *)copy_intp(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_int, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_intp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int *arg1 = (int *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_int, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_intp" "', argument " "1"" of type '" "int *""'"); 
-  }
-  arg1 = reinterpret_cast< int * >(argp1);
-  delete_intp(arg1);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_intp_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int *arg1 = (int *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args, "intp_assign", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_int, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "intp_assign" "', argument " "1"" of type '" "int *""'"); 
-  }
-  arg1 = reinterpret_cast< int * >(argp1);
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "intp_assign" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  intp_assign(arg1,arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_intp_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int *arg1 = (int *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_int, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "intp_value" "', argument " "1"" of type '" "int *""'"); 
-  }
-  arg1 = reinterpret_cast< int * >(argp1);
-  result = (int)intp_value(arg1);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_Shape(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Shape *arg1 = (Shape *) 0 ;
@@ -3770,43 +3594,26 @@ SWIGINTERN PyObject *_wrap_new_DataStreamExample(PyObject *SWIGUNUSEDPARM(self),
   } 
   arg1 = static_cast< size_t >(val1);
   result = (DataStreamExample *)new DataStreamExample(arg1);
-  {
-    std::shared_ptr<  DataStreamExample > *smartresult = result ? new std::shared_ptr<  DataStreamExample >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_std__shared_ptrT_DataStreamExample_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_DataStreamExample, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_DataStreamExample_getDataBuffer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_DataStreamExample_getDataBuffer__SWIG_0(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   DataStreamExample *arg1 = (DataStreamExample *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  std::shared_ptr< DataStreamExample const > tempshared1 ;
-  std::shared_ptr< DataStreamExample const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   uint32_t *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_std__shared_ptrT_DataStreamExample_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DataStreamExample_getDataBuffer" "', argument " "1"" of type '" "DataStreamExample const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      delete reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >((smartarg1 ? smartarg1->get() : 0));
-    }
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_DataStreamExample, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DataStreamExample_getDataBuffer" "', argument " "1"" of type '" "DataStreamExample const *""'"); 
   }
+  arg1 = reinterpret_cast< DataStreamExample * >(argp1);
   result = (uint32_t *)((DataStreamExample const *)arg1)->getDataBuffer();
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_uint32_t, 0 |  0 );
   return resultobj;
@@ -3820,27 +3627,15 @@ SWIGINTERN PyObject *_wrap_DataStreamExample_printDataBuffer(PyObject *SWIGUNUSE
   DataStreamExample *arg1 = (DataStreamExample *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  std::shared_ptr< DataStreamExample const > tempshared1 ;
-  std::shared_ptr< DataStreamExample const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_std__shared_ptrT_DataStreamExample_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DataStreamExample_printDataBuffer" "', argument " "1"" of type '" "DataStreamExample const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      delete reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >((smartarg1 ? smartarg1->get() : 0));
-    }
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_DataStreamExample, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DataStreamExample_printDataBuffer" "', argument " "1"" of type '" "DataStreamExample const *""'"); 
   }
+  arg1 = reinterpret_cast< DataStreamExample * >(argp1);
   ((DataStreamExample const *)arg1)->printDataBuffer();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -3854,28 +3649,16 @@ SWIGINTERN PyObject *_wrap_DataStreamExample_getBufferSize(PyObject *SWIGUNUSEDP
   DataStreamExample *arg1 = (DataStreamExample *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  std::shared_ptr< DataStreamExample const > tempshared1 ;
-  std::shared_ptr< DataStreamExample const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   size_t result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_std__shared_ptrT_DataStreamExample_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DataStreamExample_getBufferSize" "', argument " "1"" of type '" "DataStreamExample const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      delete reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< std::shared_ptr< const DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >((smartarg1 ? smartarg1->get() : 0));
-    }
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_DataStreamExample, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DataStreamExample_getBufferSize" "', argument " "1"" of type '" "DataStreamExample const *""'"); 
   }
+  arg1 = reinterpret_cast< DataStreamExample * >(argp1);
   result = ((DataStreamExample const *)arg1)->getBufferSize();
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
@@ -3889,28 +3672,16 @@ SWIGINTERN PyObject *_wrap_delete_DataStreamExample(PyObject *SWIGUNUSEDPARM(sel
   DataStreamExample *arg1 = (DataStreamExample *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  std::shared_ptr< DataStreamExample > tempshared1 ;
-  std::shared_ptr< DataStreamExample > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_std__shared_ptrT_DataStreamExample_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DataStreamExample" "', argument " "1"" of type '" "DataStreamExample *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< std::shared_ptr<  DataStreamExample > * >(argp1);
-      delete reinterpret_cast< std::shared_ptr<  DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< std::shared_ptr<  DataStreamExample > * >(argp1);
-      arg1 = const_cast< DataStreamExample * >((smartarg1 ? smartarg1->get() : 0));
-    }
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_DataStreamExample, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DataStreamExample" "', argument " "1"" of type '" "DataStreamExample *""'"); 
   }
-  (void)arg1; delete smartarg1;
+  arg1 = reinterpret_cast< DataStreamExample * >(argp1);
+  delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -3918,10 +3689,67 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DataStreamExample_getDataBuffer__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  DataStreamExample *arg1 = (DataStreamExample *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_DataStreamExample, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DataStreamExample_getDataBuffer" "', argument " "1"" of type '" "DataStreamExample *""'"); 
+  }
+  arg1 = reinterpret_cast< DataStreamExample * >(argp1);
+  result = (PyObject *)DataStreamExample_getDataBuffer__SWIG_1(arg1);
+  resultobj = result;
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DataStreamExample_getDataBuffer(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[2] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "DataStreamExample_getDataBuffer", 0, 1, argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_DataStreamExample, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_DataStreamExample_getDataBuffer__SWIG_1(self, argc, argv);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_DataStreamExample, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_DataStreamExample_getDataBuffer__SWIG_0(self, argc, argv);
+    }
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'DataStreamExample_getDataBuffer'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    DataStreamExample::getDataBuffer() const\n"
+    "    DataStreamExample::getDataBuffer()\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *DataStreamExample_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args, "swigregister", 1, 1, &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_std__shared_ptrT_DataStreamExample_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_DataStreamExample, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -3931,11 +3759,6 @@ SWIGINTERN PyObject *DataStreamExample_swiginit(PyObject *SWIGUNUSEDPARM(self), 
 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { "new_intp", _wrap_new_intp, METH_NOARGS, NULL},
-	 { "copy_intp", _wrap_copy_intp, METH_O, NULL},
-	 { "delete_intp", _wrap_delete_intp, METH_O, NULL},
-	 { "intp_assign", _wrap_intp_assign, METH_VARARGS, NULL},
-	 { "intp_value", _wrap_intp_value, METH_O, NULL},
 	 { "delete_Shape", _wrap_delete_Shape, METH_O, NULL},
 	 { "Shape_area", _wrap_Shape_area, METH_O, NULL},
 	 { "Shape_swigregister", Shape_swigregister, METH_O, NULL},
@@ -3957,10 +3780,10 @@ static PyMethodDef SwigMethods[] = {
 	 { "ShapeManager_swigregister", ShapeManager_swigregister, METH_O, NULL},
 	 { "ShapeManager_swiginit", ShapeManager_swiginit, METH_VARARGS, NULL},
 	 { "new_DataStreamExample", _wrap_new_DataStreamExample, METH_O, NULL},
-	 { "DataStreamExample_getDataBuffer", _wrap_DataStreamExample_getDataBuffer, METH_O, NULL},
 	 { "DataStreamExample_printDataBuffer", _wrap_DataStreamExample_printDataBuffer, METH_O, NULL},
 	 { "DataStreamExample_getBufferSize", _wrap_DataStreamExample_getBufferSize, METH_O, NULL},
 	 { "delete_DataStreamExample", _wrap_delete_DataStreamExample, METH_O, NULL},
+	 { "DataStreamExample_getDataBuffer", _wrap_DataStreamExample_getDataBuffer, METH_VARARGS, NULL},
 	 { "DataStreamExample_swigregister", DataStreamExample_swigregister, METH_O, NULL},
 	 { "DataStreamExample_swiginit", DataStreamExample_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -3993,9 +3816,7 @@ static swig_type_info _swigt__p_Rectangle = {"_p_Rectangle", "Rectangle *", 0, 0
 static swig_type_info _swigt__p_Shape = {"_p_Shape", "Shape *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ShapeManager = {"_p_ShapeManager", "ShapeManager *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_Circle_t = {"_p_std__shared_ptrT_Circle_t", "std::shared_ptr< Circle > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__shared_ptrT_DataStreamExample_t = {"_p_std__shared_ptrT_DataStreamExample_t", "std::shared_ptr< DataStreamExample > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_Rectangle_t = {"_p_std__shared_ptrT_Rectangle_t", "std::shared_ptr< Rectangle > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_ShapeManager_t = {"_p_std__shared_ptrT_ShapeManager_t", "std::shared_ptr< ShapeManager > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_Shape_t = {"_p_std__shared_ptrT_Shape_t", "std::shared_ptr< Shape > *", 0, 0, (void*)0, 0};
@@ -4008,9 +3829,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Shape,
   &_swigt__p_ShapeManager,
   &_swigt__p_char,
-  &_swigt__p_int,
   &_swigt__p_std__shared_ptrT_Circle_t,
-  &_swigt__p_std__shared_ptrT_DataStreamExample_t,
   &_swigt__p_std__shared_ptrT_Rectangle_t,
   &_swigt__p_std__shared_ptrT_ShapeManager_t,
   &_swigt__p_std__shared_ptrT_Shape_t,
@@ -4023,9 +3842,7 @@ static swig_cast_info _swigc__p_Rectangle[] = {  {&_swigt__p_Rectangle, 0, 0, 0}
 static swig_cast_info _swigc__p_Shape[] = {  {&_swigt__p_Shape, 0, 0, 0},  {&_swigt__p_Rectangle, _p_RectangleTo_p_Shape, 0, 0},  {&_swigt__p_Circle, _p_CircleTo_p_Shape, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ShapeManager[] = {  {&_swigt__p_ShapeManager, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_Circle_t[] = {  {&_swigt__p_std__shared_ptrT_Circle_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__shared_ptrT_DataStreamExample_t[] = {  {&_swigt__p_std__shared_ptrT_DataStreamExample_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_Rectangle_t[] = {  {&_swigt__p_std__shared_ptrT_Rectangle_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_ShapeManager_t[] = {  {&_swigt__p_std__shared_ptrT_ShapeManager_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_Shape_t[] = {  {&_swigt__p_std__shared_ptrT_Rectangle_t, _p_std__shared_ptrT_Rectangle_tTo_p_std__shared_ptrT_Shape_t, 0, 0},  {&_swigt__p_std__shared_ptrT_Shape_t, 0, 0, 0},  {&_swigt__p_std__shared_ptrT_Circle_t, _p_std__shared_ptrT_Circle_tTo_p_std__shared_ptrT_Shape_t, 0, 0},{0, 0, 0, 0}};
@@ -4038,9 +3855,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Shape,
   _swigc__p_ShapeManager,
   _swigc__p_char,
-  _swigc__p_int,
   _swigc__p_std__shared_ptrT_Circle_t,
-  _swigc__p_std__shared_ptrT_DataStreamExample_t,
   _swigc__p_std__shared_ptrT_Rectangle_t,
   _swigc__p_std__shared_ptrT_ShapeManager_t,
   _swigc__p_std__shared_ptrT_Shape_t,
@@ -4781,6 +4596,9 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
+  
+  import_array();
+  
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else
