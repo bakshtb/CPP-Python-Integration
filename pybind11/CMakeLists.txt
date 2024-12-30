@@ -26,6 +26,6 @@ set_target_properties(cpp_wrapper PROPERTIES
 set_target_properties(cpp_wrapper PROPERTIES
     OUTPUT_NAME "cpp_wrapper"
 )
-
+python3.10 -m pytest -v --tb=short main.py --folder-name=pybind11
 # Enable C++14 (or higher if necessary)
 target_compile_features(cpp_wrapper PRIVATE cxx_std_14)

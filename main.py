@@ -28,8 +28,8 @@ def test_data_stream_init(cpp_wrapper_module):
     data_stream = cpp_wrapper_module.DataStreamExample(3)
     buffer = data_stream.getDataBuffer()
 
-    for i in range(len(buffer)):
-        assert buffer[i] == i * 10, f"Buffer value at index {index} is incorrect"
+    for i in range(data_stream.getBufferSize()):
+        assert buffer[i] == i * 10, f"Buffer value at index {i} is incorrect"
 
 def test_data_stream_modification(cpp_wrapper_module):
     data_stream = cpp_wrapper_module.DataStreamExample(3)
