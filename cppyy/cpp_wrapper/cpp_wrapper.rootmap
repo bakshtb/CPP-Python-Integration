@@ -1,0 +1,7 @@
+[ libcpp_wrapperCppyy.so ]
+# List of selected classes
+class Circle
+class DataStreamExample
+class Rectangle
+class Shape
+class ShapeManager

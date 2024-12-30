@@ -44,3 +44,13 @@ cppyy_add_bindings(
    LINK_LIBRARIES knn_lib
    H_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
    H_FILES ${HEADERS})
+
+   
+set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/build/cpp_wrapper")
+set(DEST_DIR "${CMAKE_SOURCE_DIR}/cpp_wrapper")
+
+
+add_custom_command(TARGET knn_lib POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${SOURCE_DIR} ${DEST_DIR}
+    COMMENT "Copying folder after build"
+)
