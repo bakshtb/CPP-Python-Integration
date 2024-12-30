@@ -27,10 +27,10 @@ set(HEADERS
 include_directories(../include)
 
 # It seems like this library has to be shared...
-add_library(knn_lib SHARED ${SOURCES})
+add_library(cpp_wrapper_lib SHARED ${SOURCES})
 # Note this is a necessary compile flag for cppyy bindings to work.
-set_target_properties(knn_lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_include_directories(knn_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+set_target_properties(cpp_wrapper_lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_include_directories(cpp_wrapper_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(version "0.0.1")
 cppyy_add_bindings(
@@ -41,7 +41,7 @@ cppyy_add_bindings(
    LANGUAGE_STANDARD "17"
    GENERATE_OPTIONS "-D__PIC__;-Wno-macro-redefined"
    INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-   LINK_LIBRARIES knn_lib
+   LINK_LIBRARIES cpp_wrapper_lib
    H_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
    H_FILES ${HEADERS})
 
@@ -50,7 +50,7 @@ set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/build/cpp_wrapper")
 set(DEST_DIR "${CMAKE_SOURCE_DIR}/cpp_wrapper")
 
 
-add_custom_command(TARGET knn_lib POST_BUILD
+add_custom_command(TARGET cpp_wrapper_lib POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${SOURCE_DIR} ${DEST_DIR}
     COMMENT "Copying folder after build"
 )
