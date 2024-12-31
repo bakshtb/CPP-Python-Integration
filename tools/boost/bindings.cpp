@@ -25,7 +25,7 @@ np::ndarray getBufferAsNumpyArray(const DataStreamExample& obj) {
 }
 
 // Module initialization function for Python
-BOOST_PYTHON_MODULE(cpp_wrapper) {
+BOOST_PYTHON_MODULE(boost_integration) {
     register_ptr_to_python<std::shared_ptr<Shape>>();
     register_ptr_to_python<std::shared_ptr<ShapeManager>>();
     
