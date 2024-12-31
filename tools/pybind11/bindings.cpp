@@ -8,7 +8,7 @@
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(cpp_wrapper, m)
+PYBIND11_MODULE(pybind11_integration, m)
 {
     py::class_<Shape, std::shared_ptr<Shape>>(m, "Shape")
         .def("area", &Shape::area);

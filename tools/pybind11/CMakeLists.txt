@@ -1,31 +1,30 @@
 cmake_minimum_required(VERSION 3.0)
-project(cpp_wrapper)
+project(pybind11_integration)
 
 find_package(Python3 COMPONENTS Interpreter Development)
 find_package(pybind11 REQUIRED)
 
-include_directories(../include)
+include_directories(../../shared/include)
 
-add_library(cpp_wrapper MODULE
+add_library(pybind11_integration MODULE
     bindings.cpp
-    ../src/Circle.cpp
-    ../src/Rectangle.cpp
-    ../src/ShapeManager.cpp
-    ../src/DataStreamExample.cpp
+    ../../shared/src/Circle.cpp
+    ../../shared/src/Rectangle.cpp
+    ../../shared/src/ShapeManager.cpp
+    ../../shared/src/DataStreamExample.cpp
 )
 
-target_link_libraries(cpp_wrapper PRIVATE pybind11::module)
+target_link_libraries(pybind11_integration PRIVATE pybind11::module)
+
+set(LIBRARY_DESTINATION "${CMAKE_SOURCE_DIR}/../../libs")
+message(STATUS "Libraries will be stored in: ${LIBRARY_DESTINATION}")
 
 # Set Python module install location to the root folder
-set_target_properties(cpp_wrapper PROPERTIES
+set_target_properties(pybind11_integration PROPERTIES
     PREFIX ""  # Remove the default "lib" prefix for shared libraries
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../"  # Output to the root directory
+    LIBRARY_OUTPUT_DIRECTORY ${LIBRARY_DESTINATION}
+    SUFFIX ".so"                   # Shared library suffix
 )
 
-# Set Python module output name (optional)
-set_target_properties(cpp_wrapper PROPERTIES
-    OUTPUT_NAME "cpp_wrapper"
-)
-python3.10 -m pytest -v --tb=short main.py --folder-name=pybind11
 # Enable C++14 (or higher if necessary)
-target_compile_features(cpp_wrapper PRIVATE cxx_std_14)
+target_compile_features(pybind11_integration PRIVATE cxx_std_14)
