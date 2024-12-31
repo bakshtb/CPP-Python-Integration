@@ -1,4 +1,4 @@
-%module cpp_wrapper
+%module swig_integration
 
 %{
 #include "../include/Shape.h"

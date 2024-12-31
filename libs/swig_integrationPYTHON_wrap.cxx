@@ -2713,16 +2713,16 @@ static swig_module_info swig_module = {swig_types, 11, 0, 0, 0, 0};
 #define SWIG_TypeQuery SWIG_Python_TypeQuery
 
 /*-----------------------------------------------
-              @(target):= _cpp_wrapper.so
+              @(target):= _swig_integration.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__cpp_wrapper
+#  define SWIG_init    PyInit__swig_integration
 
 #else
-#  define SWIG_init    init_cpp_wrapper
+#  define SWIG_init    init_swig_integration
 
 #endif
-#define SWIG_name    "_cpp_wrapper"
+#define SWIG_name    "_swig_integration"
 
 #define SWIGVERSION 0x040002 
 #define SWIG_VERSION SWIGVERSION

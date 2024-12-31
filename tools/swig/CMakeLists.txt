@@ -9,7 +9,7 @@ if(POLICY CMP0086)
   cmake_policy(SET CMP0086 NEW)
 endif()
 
-project(cpp_wrapper)
+project(swig_integration)
 
 # Set the build type to Release
 set(CMAKE_BUILD_TYPE "Release")
@@ -31,37 +31,44 @@ include_directories(${NUMPY_INCLUDE_DIR})
 
 # Define the source files for the project
 set(src
-    ../src/Circle.cpp
-    ../src/Rectangle.cpp
-    ../src/ShapeManager.cpp
-    ../src/DataStreamExample.cpp
+    ../../shared/src/Circle.cpp
+    ../../shared/src/Rectangle.cpp
+    ../../shared/src/ShapeManager.cpp
+    ../../shared/src/DataStreamExample.cpp
 )
 
 # Define the include files for the project
 set(includes
-    cpp_wrapper.i
-    ../include/Circle.h
-    ../include/Rectangle.h
-    ../include/ShapeManager.h
-    ../include/DataStreamExample.h
-    ../include/Shape.h
+    swig_integration.i
+    ../../shared/include/Circle.h
+    ../../shared/include/Rectangle.h
+    ../../shared/include/ShapeManager.h
+    ../../shared/include/DataStreamExample.h
+    ../../shared/include/Shape.h
 )
 
 # Include directories
-include_directories(${Python3_INCLUDE_DIRS} ${NUMPY_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../include)
+include_directories(${Python3_INCLUDE_DIRS} ${NUMPY_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../../shared/include)
 
 # Set the SWIG module name
-set_property(SOURCE ${includes} PROPERTY SWIG_MODULE_NAME cpp_wrapper)
+set_property(SOURCE ${includes} PROPERTY SWIG_MODULE_NAME swig_integration)
 
-# Generate the SWIG wrapper.
-set(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_SOURCE_DIR})
+# Set output directory for the generated files
+set(CMAKE_SWIG_OUTDIR ${CMAKE_SOURCE_DIR}/../../libs)
+
+# Generate the SWIG wrapper and build the shared library
 set_source_files_properties(${includes} PROPERTIES CPLUSPLUS ON)
-swig_add_library(cpp_wrapper LANGUAGE python SOURCES ${src} ${includes})
-swig_link_libraries(cpp_wrapper Python3::Python)
+swig_add_library(swig_integration LANGUAGE python SOURCES ${src} ${includes})
 
-# Define the installation rules.
-install(TARGETS cpp_wrapper DESTINATION ${CMAKE_SWIG_OUTDIR})
+# Link the SWIG-generated library to Python
+swig_link_libraries(swig_integration Python3::Python)
 
+# Set the output directory for the shared library (.so or .pyd)
+set_target_properties(swig_integration PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../../libs
+)
+
+# Print Python version in green, if found
 if(Python3_FOUND)
     # Define ANSI color escape codes
     string(ASCII 27 Esc)

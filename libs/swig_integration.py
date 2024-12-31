@@ -10,9 +10,9 @@ if _swig_python_version_info < (2, 7, 0):
 
 # Import the low-level C/C++ module
 if __package__ or "." in __name__:
-    from . import _cpp_wrapper
+    from . import _swig_integration
 else:
-    import _cpp_wrapper
+    import _swig_integration
 
 try:
     import builtins as __builtin__
@@ -61,88 +61,88 @@ class _SwigNonDynamicMeta(type):
     __setattr__ = _swig_setattr_nondynamic_class_variable(type.__setattr__)
 
 
-SHARED_PTR_DISOWN = _cpp_wrapper.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _swig_integration.SHARED_PTR_DISOWN
 class Shape(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _cpp_wrapper.delete_Shape
+    __swig_destroy__ = _swig_integration.delete_Shape
 
     def area(self):
-        return _cpp_wrapper.Shape_area(self)
+        return _swig_integration.Shape_area(self)
 
-# Register Shape in _cpp_wrapper:
-_cpp_wrapper.Shape_swigregister(Shape)
+# Register Shape in _swig_integration:
+_swig_integration.Shape_swigregister(Shape)
 
 class Circle(Shape):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, radius):
-        _cpp_wrapper.Circle_swiginit(self, _cpp_wrapper.new_Circle(radius))
+        _swig_integration.Circle_swiginit(self, _swig_integration.new_Circle(radius))
 
     def area(self):
-        return _cpp_wrapper.Circle_area(self)
-    __swig_destroy__ = _cpp_wrapper.delete_Circle
+        return _swig_integration.Circle_area(self)
+    __swig_destroy__ = _swig_integration.delete_Circle
 
-# Register Circle in _cpp_wrapper:
-_cpp_wrapper.Circle_swigregister(Circle)
+# Register Circle in _swig_integration:
+_swig_integration.Circle_swigregister(Circle)
 
 class Rectangle(Shape):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, width, height):
-        _cpp_wrapper.Rectangle_swiginit(self, _cpp_wrapper.new_Rectangle(width, height))
+        _swig_integration.Rectangle_swiginit(self, _swig_integration.new_Rectangle(width, height))
 
     def area(self):
-        return _cpp_wrapper.Rectangle_area(self)
-    __swig_destroy__ = _cpp_wrapper.delete_Rectangle
+        return _swig_integration.Rectangle_area(self)
+    __swig_destroy__ = _swig_integration.delete_Rectangle
 
-# Register Rectangle in _cpp_wrapper:
-_cpp_wrapper.Rectangle_swigregister(Rectangle)
+# Register Rectangle in _swig_integration:
+_swig_integration.Rectangle_swigregister(Rectangle)
 
 class ShapeManager(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def addShape(self, shape):
-        return _cpp_wrapper.ShapeManager_addShape(self, shape)
+        return _swig_integration.ShapeManager_addShape(self, shape)
 
     def totalArea(self):
-        return _cpp_wrapper.ShapeManager_totalArea(self)
+        return _swig_integration.ShapeManager_totalArea(self)
 
     def getShape(self, index):
-        return _cpp_wrapper.ShapeManager_getShape(self, index)
+        return _swig_integration.ShapeManager_getShape(self, index)
 
     def __init__(self):
-        _cpp_wrapper.ShapeManager_swiginit(self, _cpp_wrapper.new_ShapeManager())
-    __swig_destroy__ = _cpp_wrapper.delete_ShapeManager
+        _swig_integration.ShapeManager_swiginit(self, _swig_integration.new_ShapeManager())
+    __swig_destroy__ = _swig_integration.delete_ShapeManager
 
-# Register ShapeManager in _cpp_wrapper:
-_cpp_wrapper.ShapeManager_swigregister(ShapeManager)
+# Register ShapeManager in _swig_integration:
+_swig_integration.ShapeManager_swigregister(ShapeManager)
 
 class DataStreamExample(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, size):
-        _cpp_wrapper.DataStreamExample_swiginit(self, _cpp_wrapper.new_DataStreamExample(size))
+        _swig_integration.DataStreamExample_swiginit(self, _swig_integration.new_DataStreamExample(size))
 
     def printDataBuffer(self):
-        return _cpp_wrapper.DataStreamExample_printDataBuffer(self)
+        return _swig_integration.DataStreamExample_printDataBuffer(self)
 
     def getBufferSize(self):
-        return _cpp_wrapper.DataStreamExample_getBufferSize(self)
-    __swig_destroy__ = _cpp_wrapper.delete_DataStreamExample
+        return _swig_integration.DataStreamExample_getBufferSize(self)
+    __swig_destroy__ = _swig_integration.delete_DataStreamExample
 
     def getDataBuffer(self, *args):
-        return _cpp_wrapper.DataStreamExample_getDataBuffer(self, *args)
+        return _swig_integration.DataStreamExample_getDataBuffer(self, *args)
 
-# Register DataStreamExample in _cpp_wrapper:
-_cpp_wrapper.DataStreamExample_swigregister(DataStreamExample)
+# Register DataStreamExample in _swig_integration:
+_swig_integration.DataStreamExample_swigregister(DataStreamExample)
 
 
 
