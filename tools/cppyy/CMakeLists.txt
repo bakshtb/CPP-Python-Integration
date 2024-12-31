@@ -11,20 +11,20 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CPPYY_MODULE_PATH})
 find_package(Cppyy)
 
 set(SOURCES 
-../src/Circle.cpp
-../src/Rectangle.cpp
-../src/ShapeManager.cpp
-../src/DataStreamExample.cpp
+../../shared/src/Circle.cpp
+../../shared/src/Rectangle.cpp
+../../shared/src/ShapeManager.cpp
+../../shared/src/DataStreamExample.cpp
 )
 set(HEADERS
-../include/Circle.h
-../include/Rectangle.h
-../include/ShapeManager.h
-../include/DataStreamExample.h
-../include/Shape.h
+../../shared/include/Circle.h
+../../shared/include/Rectangle.h
+../../shared/include/ShapeManager.h
+../../shared/include/DataStreamExample.h
+../../shared/include/Shape.h
 )
 
-include_directories(../include)
+include_directories(../../shared/include)
 
 # It seems like this library has to be shared...
 add_library(cpp_wrapper_lib SHARED ${SOURCES})
@@ -34,7 +34,7 @@ target_include_directories(cpp_wrapper_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(version "0.0.1")
 cppyy_add_bindings(
-   "cpp_wrapper"
+   "cppyy_integration"
    "1.0"
    "Baruch"
    "bakshtb@gmail.com"
@@ -46,11 +46,11 @@ cppyy_add_bindings(
    H_FILES ${HEADERS})
 
    
-set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/build/cpp_wrapper")
-set(DEST_DIR "${CMAKE_SOURCE_DIR}/cpp_wrapper")
+set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/build/cppyy_integration")
+set(DEST_DIR "${CMAKE_SOURCE_DIR}/../../libs/cppyy_integration")
 
 
-add_custom_command(TARGET cpp_wrapper_lib POST_BUILD
+add_custom_target(copy_folder_after_build ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${SOURCE_DIR} ${DEST_DIR}
     COMMENT "Copying folder after build"
 )
