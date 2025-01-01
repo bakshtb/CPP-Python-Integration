@@ -51,6 +51,44 @@ Before building any tool, ensure it is installed on your system. Installation in
 
 ---
 
+### C++ Code Overview
+
+The C++ code defines a structure to model geometric shapes (`Circle` and `Rectangle`) and manage them through a `ShapeManager`. Here's how it's organized:
+
+- **Base Class `Shape`**: Acts as an abstract base class with a pure virtual `area()` method, demonstrating **inheritance**. 
+
+- **Derived Classes**:
+  - **`Circle`**: Inherits from `Shape`, implements `area()` to compute the area of a circle using the formula πr².
+  - **`Rectangle`**: Also inherits from `Shape`, implementing `area()` for rectangle area calculation (length × width).
+
+- **`ShapeManager`**:
+  - Utilizes **smart pointers** (`std::shared_ptr<Shape>`) for managing a collection of shapes. This ensures automatic memory management, preventing memory leaks by leveraging the shared ownership model of `std::shared_ptr`.
+  - The class provides methods to add shapes, calculate the total area of all managed shapes, and other utility functions for shape manipulation.
+
+- **`DataStreamExample`**:
+  - Showcases the use of **raw pointers** for direct memory manipulation. It allocates a buffer using `new[]` and deallocates it with `delete[]`, emphasizing manual memory management which is less common in modern C++ but still useful in specific scenarios.
+
+This combination of inheritance for polymorphism, smart pointers for safe memory handling, and raw pointers for explicit control, provides a robust framework for shape management and data handling, facilitating integration with Python.
+
+---
+
+### Test Cases Overview
+
+We've included comprehensive test cases to ensure both the C++ functionality and its integration with Python are functioning correctly:
+
+- **`test_shape_manager`**:
+  - Checks that `ShapeManager` can manage both `Circle` and `Rectangle` instances correctly, including accurate area calculations for individual shapes and the sum of all shapes.
+
+- **`test_data_stream_init`**:
+  - Ensures that the `DataStreamExample` class initializes its buffer correctly, where each element should be `index * 10`.
+
+- **`test_data_stream_modification`**:
+  - Confirms that changes made to the buffer (`uint32_t*`) within `DataStreamExample` are correctly reflected when the buffer is subsequently accessed, validating the integrity of memory operations.
+
+These tests are crucial for verifying the seamless interaction between C++ and Python, focusing on both shape management and data stream operations.
+
+---
+
 ## Building Libraries
 
 To build the Python library for a specific tool:
@@ -76,24 +114,3 @@ python3 -m pytest -v --tb=short tests/main.py --tool-name=boost_integration
 ```
 
 This example command runs all tests using the library built with Boost.Python (from `/libs/boost_integration`).
-
-
-### C++ Code Overview
-
-The C++ code consists of classes that model geometric shapes (`Circle` and `Rectangle`) and manage them (`ShapeManager`). The `Shape` class serves as a base class with a virtual `area()` method, showcasing **inheritance** as `Circle` and `Rectangle` inherit from `Shape` and implement the `area()` method to calculate their respective areas. The `ShapeManager` class manages a collection of shapes, using **smart pointers** (specifically `std::shared_ptr<Shape>`) to store and handle shapes dynamically, ensuring safe memory management. The `DataStreamExample` class demonstrates the use of **raw pointers**, where a buffer is allocated using `new` and deallocated with `delete[]`, showcasing manual memory management.
-
-This integration of inheritance, smart pointers, and raw pointers ensures a blend of modern C++ practices for memory safety and efficient shape management, allowing smooth interaction with Python.
-
----
-
-### Test Cases Overview
-
-The project includes the following test cases to validate the C++ and Python integration:
-
-- **`test_shape_manager`**: Validates that the `ShapeManager` correctly manages `Circle` and `Rectangle` objects, and ensures the area calculations (individual and total) are accurate.
-  
-- **`test_data_stream_init`**: Verifies that the `DataStreamExample` correctly initializes the buffer, with values equal to `index * 10`.
-  
-- **`test_data_stream_modification`**: Ensures that modifications to the `DataStreamExample` buffer are properly reflected when accessed later.
-
-These tests ensure that the integration between C++ and Python works as expected, particularly when managing shapes and manipulating data buffers.
