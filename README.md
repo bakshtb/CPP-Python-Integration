@@ -67,9 +67,7 @@ The C++ code is broken down into two main components:
 
 2. **Raw Pointers**:
    - **`DataStreamExample`**:
-     - Showcases the use of **raw pointers** for direct memory manipulation. It allocates a buffer using `new[]` and deallocates it with `delete[]`, emphasizing manual memory management which is less common in modern C++ but still useful in specific scenarios.
-
-This structure provides a blend of modern C++ practices for memory safety and efficient shape management, alongside traditional memory handling, enabling smooth integration with Python.
+     - This class illustrates the use of **raw pointers** for memory management. It initializes a `uint32_t*` buffer with values based on their index, provides methods for getting the buffer pointer, getting the buffer size and printing the buffer to the console.
 
 ---
 
