@@ -75,4 +75,4 @@ Automated tests ensure the correctness of the integrations. Tests are executed u
 python3 -m pytest -v --tb=short tests/main.py --tool-name=boost_integration
 ```
 
-This example command runs all tests using the library built with Boost.Python.
+This example command runs all tests using the library built with Boost.Python (from /libs/boost_integration).
