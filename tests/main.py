@@ -2,7 +2,6 @@ import pytest
 import math
 
 def test_shape_manager(cpp_wrapper_module):
-    # Define variables for the dimensions
     circle_radius = 7
     rectangle_length = 5
     rectangle_width = 8
