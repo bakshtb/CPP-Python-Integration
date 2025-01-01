@@ -84,7 +84,7 @@ We've included comprehensive test cases to ensure both the C++ functionality and
 - **`test_data_stream_modification`**:
   - Confirms that changes made to the buffer (`uint32_t*`) within `DataStreamExample` are correctly reflected when the buffer is subsequently accessed, validating the integrity of memory operations.
 
-These tests are crucial for verifying the seamless interaction between C++ and Python, focusing on both shape management and data stream operations.
+These tests are crucial for verifying the seamless interaction between C++ and Python.
 
 ---
 
