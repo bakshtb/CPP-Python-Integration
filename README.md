@@ -53,22 +53,23 @@ Before building any tool, ensure it is installed on your system. Installation in
 
 ### C++ Code Overview
 
-The C++ code defines a structure to model geometric shapes (`Circle` and `Rectangle`) and manage them through a `ShapeManager`. Here's how it's organized:
+The C++ code is broken down into two main components:
 
-- **Base Class `Shape`**: Acts as an abstract base class with a pure virtual `area()` method, demonstrating **inheritance**. 
+1. **Inheritance and Smart Pointers**:
+   - Defines classes for geometric shapes (`Circle` and `Rectangle`) and their management through a `ShapeManager`. Here's how it's organized:
+     - **Base Class `Shape`**: Acts as an abstract base class with a pure virtual `area()` method, demonstrating **inheritance**. 
+     - **Derived Classes**:
+       - **`Circle`**: Inherits from `Shape`, implements `area()` to compute the area of a circle using the formula πr².
+       - **`Rectangle`**: Also inherits from `Shape`, implementing `area()` for rectangle area calculation (length × width).
+     - **`ShapeManager`**:
+       - Utilizes **smart pointers** (`std::shared_ptr<Shape>`) for managing a collection of shapes. This ensures automatic memory management, preventing memory leaks by leveraging the shared ownership model of `std::shared_ptr`.
+       - The class provides methods to add shapes, calculate the total area of all managed shapes, and other utility functions for shape manipulation.
 
-- **Derived Classes**:
-  - **`Circle`**: Inherits from `Shape`, implements `area()` to compute the area of a circle using the formula πr².
-  - **`Rectangle`**: Also inherits from `Shape`, implementing `area()` for rectangle area calculation (length × width).
+2. **Raw Pointers**:
+   - **`DataStreamExample`**:
+     - Showcases the use of **raw pointers** for direct memory manipulation. It allocates a buffer using `new[]` and deallocates it with `delete[]`, emphasizing manual memory management which is less common in modern C++ but still useful in specific scenarios.
 
-- **`ShapeManager`**:
-  - Utilizes **smart pointers** (`std::shared_ptr<Shape>`) for managing a collection of shapes. This ensures automatic memory management, preventing memory leaks by leveraging the shared ownership model of `std::shared_ptr`.
-  - The class provides methods to add shapes, calculate the total area of all managed shapes, and other utility functions for shape manipulation.
-
-- **`DataStreamExample`**:
-  - Showcases the use of **raw pointers** for direct memory manipulation. It allocates a buffer using `new[]` and deallocates it with `delete[]`, emphasizing manual memory management which is less common in modern C++ but still useful in specific scenarios.
-
-This combination of inheritance for polymorphism, smart pointers for safe memory handling, and raw pointers for explicit control, provides a robust framework for shape management and data handling, facilitating integration with Python.
+This structure provides a blend of modern C++ practices for memory safety and efficient shape management, alongside traditional memory handling, enabling smooth integration with Python.
 
 ---
 
@@ -86,7 +87,6 @@ We've included comprehensive test cases to ensure both the C++ functionality and
   - Confirms that changes made to the buffer (`uint32_t*`) within `DataStreamExample` are correctly reflected when the buffer is subsequently accessed, validating the integrity of memory operations.
 
 These tests are crucial for verifying the seamless interaction between C++ and Python, focusing on both shape management and data stream operations.
-
 ---
 
 ## Building Libraries
